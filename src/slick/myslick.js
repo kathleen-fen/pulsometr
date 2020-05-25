@@ -109,20 +109,23 @@ $(document).ready(function(){
     $('input[name=phone]').mask("+375 (99) 999-99-99");
 
     $('form').submit(function(e) {
+      console.log($(e.target).valid());
       e.preventDefault();
-      $.ajax({
-        type: "POST",
-        url: "mailer/smart.php",
-        data: $(this).serialize()
-      }).done(function(){
-        $(this).find("input").val("");
-        $('#consultation, #order').fadeOut();
-        $('.overlay, #thanks').fadeIn('slow')
-        
+      if ($(e.target).valid()) {
+        $.ajax({
+          type: "POST",
+          url: "mailer/smart.php",
+          data: $(this).serialize()
+        }).done(function(){
+          $(this).find("input").val("");
+          $('#consultation, #order').fadeOut();
+          $('.overlay, #thanks').fadeIn('slow')
+          
 
 
-        $('form').trigger('reset');
-      });
+          $('form').trigger('reset');
+        });
+      }
       return false;
     });
     //smooth scroll and pageup

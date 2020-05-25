@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 //const pug = require('gulp-pug');
 const sass = require('gulp-sass');
@@ -8,6 +9,8 @@ const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
+const imagemin = require('gulp-imagemin');
+const htmlmin = require('gulp-htmlmin');
 
 
 
@@ -36,6 +39,7 @@ gulp.task('server', function() {
 /* ------------ html ------------- */
 gulp.task('templates:compile', function buildHTML() {
   return gulp.src('src/index.html')
+    .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('build'))
 });
 /* ------------ css ------------- */
@@ -49,6 +53,7 @@ gulp.task('styles:compile', function () {
   return gulp.src('src/scss/main.scss')
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(rename('main.min.css'))
+    .pipe(autoprefixer())
     .pipe(gulp.dest('build/css'));
 });
 
@@ -95,7 +100,8 @@ gulp.task('copy:fonts', function() {
 /* ------------ Copy images ------------- */
 gulp.task('copy:images', function() {
   return gulp.src('./src/img/**/*.*')
-    .pipe(gulp.dest('build/img'));
+  .pipe(imagemin())
+  .pipe(gulp.dest('build/img'));
 });
 /* ------------ Copy slick ------------- */
 gulp.task('copy:slick', function() {

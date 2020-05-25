@@ -20,7 +20,9 @@
   "devDependencies": {
     "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^7.1.0",
     "gulp-pug": "^4.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
@@ -30,7 +32,15 @@
     "rimraf": "^3.0.0"
   },
   "dependencies": {
+    "animate.css": "^4.1.0",
     "font-awesome": "^4.7.0",
+    "gulp-htmlmin": "^5.0.1",
     "normalize.scss": "^0.1.0"
-  }
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ]
 }
